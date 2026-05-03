@@ -1,0 +1,34 @@
+schema: '2.0'
+stages:
+  process:
+    cmd: python src/process_ratings.py
+    deps:
+    - path: data/raw/ratings.csv
+      hash: md5
+      md5: dff8efc826e909fc3f52ca1a55a1af7d
+      size: 42779
+    - path: src/process_ratings.py
+      hash: md5
+      md5: 5c080dc3177bce4753c0f96bc86b6c5e
+      size: 820
+    outs:
+    - path: data/processed/ratings_clean.csv
+      hash: md5
+      md5: 5f463e876256baf5ecb0b1aa540fa327
+      size: 40598
+  features:
+    cmd: python src/create_features.py
+    deps:
+    - path: data/processed/ratings_clean.csv
+      hash: md5
+      md5: 5f463e876256baf5ecb0b1aa540fa327
+      size: 40598
+    - path: src/create_features.py
+      hash: md5
+      md5: 686ac443ff95ce501b29ce4d7125cb72
+      size: 642
+    outs:
+    - path: models/user_similarity.pkl
+      hash: md5
+      md5: d3eebff1da17d7d5288f8b4ebba89197
+      size: 320225
